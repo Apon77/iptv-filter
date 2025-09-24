@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iptv filter</title>
+</head>
+<body>
+
+<input type="file" onchange="readText(event)" />
+<p></p>
+<span id='progress'></span>
+<span></span>
+<button onclick="downloadfile()">Download filtered</button>
+<p id='progress'></p>
+<pre id="output"></pre>
+
+
+<script>
+    var output = document.getElementById('output')
+    var progress = document.getElementById('progress')
+    var filename = 'ipfile'
+
+    async function readText(event) {
+        const file = event.target.files.item(0)
+        var text = await file.text();
+        filename = file.name
+        //document.getElementById("output").innerText = text
+        lines = text.split('\n')
+        for (let index = 0; index < lines.length; index++) {
+            //console.log(lines[index])
+            line = lines[index]
+
+            if (line.includes("http")) {
+                if (line.includes(".m3u8")) {
+                    fetchData(line)
+                }
+            }
+
+        }
+    }
+
+
+	async function fetchData(url) {
+        const response = await fetch(url);
+    	const data = await response.text();
+        if (data.includes('#EXT')) {
+            output.innerHTML += url + '\n'
+        }
+	}
+
+
+    function downloadfile(){
+        var text = output.innerHTML
+        var blob = new Blob([text], { type: 'text/plain' })
+        var link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = `filtered-${filename}.m3u8`
+        link.click()            
+    }
+
+
+</script>
+
+
+</body>
+</html>
