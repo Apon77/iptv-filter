@@ -40,3 +40,16 @@ function downloadfile() {
     link.click()
 }
 
+function addplayer() {
+    src = document.getElementById("urltext").value
+
+    player = `
+    <media-player autoplay title="" src=${src}>
+    <media-provider></media-provider>
+    <media-video-layout thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"></media-video-layout>
+    </media-player>`
+
+    document.getElementById("player").innerHTML = player
+
+
+}

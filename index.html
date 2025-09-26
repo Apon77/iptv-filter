@@ -3,19 +3,25 @@
 
 <head>
     <title>IPTV Filter</title>
-    <link rel="stylesheet" href="src/style.css">
     <link rel="icon" type="image/png" sizes="16x16" href="src/favicon.png" />
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+    <link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
 </head>
 
 <body>
     <input type="file" onchange="readText(event)" />
+    <div><input style="width: 50%;" id="urltext" type="text" value="https://iptvbd.live/metv1080/1080.m3u8"></div>
     <p></p>
     <span id='progress'></span>
-    <span></span>
     <button onclick="downloadfile()">Download filtered</button>
+    <button onclick="addplayer()">Play</button>
+    <div id="player"></div>
     <p id='progress'></p>
     <pre id="output"></pre>
     <script src="src/script.js"></script>
+    <script src="https://cdn.vidstack.io/player" type="module"></script>
+
 </body>
 
 </html>
