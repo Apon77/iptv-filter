@@ -13,18 +13,8 @@ async function readText(event) {
         urlline = lines[index + 1]
         if (infoline.includes('#EXTINF')) {
             if (urlline.includes(".m3u8")) {
-                try {
-                    response = await fetch(urlline)
-                    progress.innerHTML = `processing ${index}/${lines.length}`
-                    if (response.ok) {
-                        data = await response.text()
-                        if (data.includes('#EXT')) {
-                            output.innerHTML += infoline + '\n' + urlline + '\n' + '\n'
-                        }
-                    } else { throw new Error('failed to fetch tv') }
-                } catch (error) {
-                    console.log('error;', error)
-                }
+                console.log(urlline)
+                fetchdata(urlline, infoline)
             }
         }
     }
@@ -51,5 +41,20 @@ function addplayer() {
 
     document.getElementById("player").innerHTML = player
 
+
+}
+
+async function fetchdata(url, infourl) {
+    try {
+        response = await fetch(url)
+        if (response.ok) {
+            data = await response.text()
+            if (data.includes('#EXT')) {
+                output.innerHTML += infourl + '\n' + url + '\n' + '\n'
+            }
+        } else { throw new Error('failed to fetch tv') }
+    } catch (error) {
+        console.log('error;', error)
+    }
 
 }
