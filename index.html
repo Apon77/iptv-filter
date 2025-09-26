@@ -11,14 +11,16 @@
 
 <body>
     <input type="file" onchange="readText(event)" />
-    <div><input style="width: 50%;" id="urltext" type="text" value="https://iptvbd.live/metv1080/1080.m3u8"></div>
+    <div><input style="width: 50%;" id="urltext" type="text" value="https://live-stream.utkalbongo.com/utkalbongo/stream2/hls/amarbanglatwolivestream.m3u8"></div>
     <p></p>
     <span id='progress'></span>
     <button onclick="downloadfile()">Download filtered</button>
     <button onclick="addplayer()">Play</button>
+    <button onclick="hideplayer()">Hide Player</button>
     <div id="player"></div>
     <p id='progress'></p>
     <pre id="output"></pre>
+    <pre hidden id="download"></pre>
     <script src="src/script.js"></script>
     <script src="https://cdn.vidstack.io/player" type="module"></script>
 

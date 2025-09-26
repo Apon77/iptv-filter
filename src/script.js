@@ -1,5 +1,6 @@
 var output = document.getElementById('output')
 var progress = document.getElementById('progress')
+var download = document.getElementById('download')
 var filename = ''
 
 async function readText(event) {
@@ -12,8 +13,8 @@ async function readText(event) {
         infoline = lines[index]
         urlline = lines[index + 1]
         if (infoline.includes('#EXTINF')) {
+            channelname = infoline.split(',')[1]
             if (urlline.includes(".m3u8")) {
-                console.log(urlline)
                 fetchdata(urlline, infoline)
             }
         }
@@ -34,15 +35,22 @@ function addplayer() {
     src = document.getElementById("urltext").value
 
     player = `
-    <media-player autoplay title="" src=${src}>
+    <media-player autoplay stream-type="ll-live:dvr" title="" src=${src}>
     <media-provider></media-provider>
     <media-video-layout thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"></media-video-layout>
     </media-player>`
 
+    
     document.getElementById("player").innerHTML = player
 
 
 }
+
+function hideplayer() {
+    document.getElementById("player").innerHTML = ""
+}
+
+
 
 async function fetchdata(url, infourl) {
     try {
